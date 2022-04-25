@@ -1,8 +1,8 @@
-# WPScan add-on for Dradis
+# Veracode add-on for Dradis
 
-[![Build Status](https://secure.travis-ci.org/dradis/dradis-wpscan.png?branch=master)](http://travis-ci.org/dradis/dradis-wpscan) [![Code Climate](https://codeclimate.com/github/dradis/dradis-wpscan.png)](https://codeclimate.com/github/dradis/dradis-wpscan.png)
+[![Build Status](https://secure.travis-ci.org/dradis/dradis-veracode.png?branch=master)](http://travis-ci.org/dradis/dradis-veracode) [![Code Climate](https://codeclimate.com/github/dradis/dradis-veracode.png)](https://codeclimate.com/github/dradis/dradis-veracode.png)
 
-Upload [WPScan](https://wpscan.org/) security scanner JSON output into Dradis.
+Upload [Veracode Static Analysis](https://www.veracode.com/products/binary-static-analysis-sast) security scanner XML output into Dradis.
 
 The add-on requires [Dradis CE](https://dradisframework.com/ce/) > 3.0, or [Dradis Pro](https://dradisframework.com/pro/).
 
