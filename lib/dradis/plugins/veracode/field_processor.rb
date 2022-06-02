@@ -3,7 +3,13 @@ module Dradis
     module Veracode
       class FieldProcessor < Dradis::Plugins::Upload::FieldProcessor
         def post_initialize(args={})
-          @flaw = ::Veracode::Flaw.new(data)
+
+          # Dealing with XML from Plugin Manager
+          if (data.name == 'cwe')
+            @flaw = ::Veracode::Flaw.new(data.at_xpath('./staticflaws/flaw'))
+          else
+            @flaw = ::Veracode::Flaw.new(data)
+          end
         end
 
         def value(args={})
@@ -14,13 +20,7 @@ module Dradis
           # meaningless).
           _, name = field.split('.')
 
-          # Potentially this could go up to Flaw, if we end up with more than
-          # one Veracode object to deal with.
-          if name == 'cwename'
-            data.parent.parent[:cwename]
-          else
-            @flaw.try(name) || 'n/a'
-          end
+          @flaw.try(name) || 'n/a'
         end
       end
     end

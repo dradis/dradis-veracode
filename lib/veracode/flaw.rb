@@ -19,9 +19,9 @@ module Veracode
     def supported_tags
       [
         # attributes
-        :categoryid, :categoryname, :cweid, :description, :exploitlevel, :issueid,
-        :line, :mitigation_status, :mitigation_status_desc, :module, :note,
-        :remediation_status, :remediationeffort, :severity, :sourcefile,
+        :categoryid, :categoryname, :cweid, :cwename, :description, :exploitlevel,
+        :issueid, :line, :mitigation_status, :mitigation_status_desc, :module,
+        :note, :remediation_status, :remediationeffort, :severity, :sourcefile,
         :sourcefilepath
       ]
     end
@@ -52,6 +52,8 @@ module Veracode
       # First we try the attributes
       method_name = method.to_s
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
+
+      return @xml.parent.parent[:cwename] if method == :cwename
     end
   end
 end
