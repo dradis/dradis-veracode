@@ -1,5 +1,9 @@
 module Dradis::Plugins::Veracode
   class Importer < Dradis::Plugins::Upload::Importer
+    def self.templates
+      { issue: 'issue' }
+    end
+
     # The framework will call this function if the user selects this plugin from
     # the dropdown list and uploads a file.
     # @returns true if the operation was successful, false otherwise
