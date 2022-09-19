@@ -1,2 +1,2 @@
-v4.3.0 (XXX 2022)
+v4.5.0 (September 2022)
   - Initial release
