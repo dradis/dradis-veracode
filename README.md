@@ -4,8 +4,7 @@
 
 Upload [Veracode Static Analysis](https://www.veracode.com/products/binary-static-analysis-sast) security scanner XML output into Dradis.
 
-The add-on requires [Dradis CE](https://dradisframework.com/ce/) > 3.0, or [Dradis Pro](https://dradisframework.com/pro/).
-
+The add-on requires [Dradis CE](https://dradis.com/ce/) > 3.0, or [Dradis Pro](https://dradis.com/).
 
 ## More information
 
