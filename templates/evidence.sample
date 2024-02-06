@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<cwe cweid="259" cwename="Use of Hard-coded Password" pcirelated="true" owasp="1353" sans="798" certjava="1152">
+<cwe cweid="259" cwename="Use of Hard-coded Password" pcirelated="true" owasp="1353" sans="798" certjava="1152" dradis_type="evidence">
   <description>
     <text text="A method uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack."/>
   </description>
@@ -30,8 +30,7 @@
       sourcefilepath="/libraries/mybank/src/"
       scope="UNKNOWN"
       functionprototype="!main() : void"
-      functionrelativelocation="-1"
-      dradis_type="evidence">
+      functionrelativelocation="-1">
 
       <mitigations>
         <mitigation action="Potential False Positive" description="As discussed last week, these are potential false positives. Need your review." user="Adama" date="2022-01-24 21:55:55 UTC"/>

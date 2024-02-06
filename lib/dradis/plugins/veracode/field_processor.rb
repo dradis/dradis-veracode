@@ -3,14 +3,17 @@ module Dradis
     module Veracode
       class FieldProcessor < Dradis::Plugins::Upload::FieldProcessor
         def post_initialize(args = {})
-          flaw_xml = data.name == 'cwe' ? data.at_xpath('./staticflaws/flaw') : data
-
-          # Dealing with XML from Plugin Manager
           @record =
-            if (flaw_xml['dradis_type'] == 'evidence')
-              ::Veracode::Evidence.new(flaw_xml)
+            if (data.is_a?(::Veracode::Flaw) || data.is_a?(::Veracode::Evidence))
+              data
+
+            # Note: The evidence and flaw samples are the same but they need to
+            # be differentiated in the plugins manager preview. In that case,
+            # we're adding a "dradis_type" attribute in the evidence.sample file
+            elsif (data['dradis_type'] == 'evidence')
+              ::Veracode::Evidence.new(data.at_xpath('./staticflaws/flaw'))
             else
-              ::Veracode::Flaw.new(flaw_xml)
+              ::Veracode::Flaw.new(data.at_xpath('./staticflaws/flaw'))
             end
         end
 
