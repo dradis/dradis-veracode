@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<detailedreport xmlns:xsi="http&#x3a;&#x2f;&#x2f;www.w3.org&#x2f;2001&#x2f;XMLSchema-instance" xmlns="https&#x3a;&#x2f;&#x2f;www.veracode.com&#x2f;schema&#x2f;reports&#x2f;export&#x2f;1.0" xsi:schemaLocation="https&#x3a;&#x2f;&#x2f;www.veracode.com&#x2f;schema&#x2f;reports&#x2f;export&#x2f;1.0 https&#x3a;&#x2f;&#x2f;analysiscenter.veracode.com&#x2f;resource&#x2f;detailedreport.xsd" report_format_version="1.5" account_id="10470" app_name="Cybersecurity-Pilot" app_id="1280614" analysis_id="22666593" static_analysis_unit_id="22682243" sandbox_id="4031820" first_build_submitted_date="2022-12-12 06&#x3a;18&#x3a;41 UTC" version="12 Dec 2022 Static Promoted" build_id="22695302" submitter="Sai Manjunath Reddy Katha" platform="Not Specified" assurance_level="2" business_criticality="2" generation_date="2023-03-07 14&#x3a;45&#x3a;59 UTC" veracode_level="VL3 &#x2b; SCA" total_flaws="3" flaws_not_mitigated="3" teams="SecurityReviewServices" life_cycle_stage="Not Specified" planned_deployment_date="2022-12-12 07&#x3a;40&#x3a;09 UTC" last_update_time="2022-12-12 08&#x3a;20&#x3a;14 UTC" is_latest_build="true" policy_name="HP Internet App" policy_version="13" policy_compliance_status="Pass" policy_rules_status="Pass" grace_period_expired="false" scan_overdue="false" business_owner="Hoelzer, Ralf" business_unit="Cybersecurity" tags="sammuel.washington&#x40;hp.com" legacy_scan_engine="false"><static-analysis rating="A" score="99" submitted_date="2022-12-12 08&#x3a;19&#x3a;44 UTC" published_date="2022-12-12 08&#x3a;20&#x3a;13 UTC" version="12 Dec 2022 Static Promoted" analysis_size_bytes="105400" engine_version="20221110172554">
+      <modules>
+         <module name="pipeline-scan.jar" compiler="JAVAC_8" os="Java J2SE 8" architecture="JVM" loc="6130" score="99" numflawssev0="0" numflawssev1="0" numflawssev2="1" numflawssev3="2" numflawssev4="0" numflawssev5="0"/>
+      </modules>
+   </static-analysis>
+   <severity level="5"/>
+   <severity level="4"/>
+   <severity level="3">
+      <category categoryid="21" categoryname="CRLF Injection" pcirelated="true">
+         <desc>
+            <para text="The acronym CRLF stands for &#x22;Carriage Return, Line Feed&#x22; and refers to the sequence of characters used to denote the end of a line of text.  CRLF injection vulnerabilities occur when data enters an application from an untrusted source and is not properly validated before being used.  For example, if an attacker is able to inject a CRLF into a log file, he could append falsified log entries, thereby misleading administrators or cover traces of the attack.  If an attacker is able to inject CRLFs into an HTTP response header, he can use this ability to carry out other attacks such as cache poisoning.  CRLF vulnerabilities primarily affect data integrity.  "/>
+         </desc>
+         <recommendations>
+            <para text="Apply robust input filtering for all user-supplied data, using centralized data validation routines when possible.  Use output filters to sanitize all output derived from user-supplied input, replacing non-alphanumeric characters with their HTML entity equivalents."/>
+         </recommendations>
+         <cwe cweid="117" cwename="Improper Output Neutralization for Logs" pcirelated="true" owasp="1355" certjava="1134">
+            <description>
+               <text text="A function call could result in a log forging attack.  Writing untrusted data into a log file allows an attacker to forge log entries or inject malicious content into log files.  Corrupted log files can be used to cover an attacker&#x27;s tracks or as a delivery mechanism for an attack on a log viewing or processing utility.  For example, if a web administrator uses a browser-based utility to review logs, a cross-site scripting attack might be possible."/>
+            </description>
+            <staticflaws>
+               <flaw severity="3" categoryname="Improper Output Neutralization for Logs" count="1" issueid="6" module="pipeline-scan.jar" type="org.slf4j.Logger.debug" description="This call to org.slf4j.Logger.debug&#x28;&#x29; could result in a log forging attack. Writing untrusted data into a log file allows an attacker to forge log entries or inject malicious content into log files. Corrupted log files can be used to cover an attacker&#x27;s tracks or as a delivery mechanism for an attack on a log viewing or processing utility. For example, if a web administrator uses a browser-based utility to review logs, a cross-site scripting attack might be possible. The first argument to debug&#x28;&#x29; contains tainted data from the variable escapedString. The tainted data originated from an earlier call to org.apache.http.impl.client.CloseableHttpClient.execute.&#xd;&#xa;&#xd;&#xa;Avoid directly embedding user input in log files when possible. Sanitize untrusted data used to construct log entries by using a safe logging mechanism such as the OWASP ESAPI Logger, which will automatically remove unexpected carriage returns and line feeds and can be configured to use HTML entity encoding for non-alphanumeric data. Alternatively, some of the XSS escaping functions from the OWASP Java Encoder project will also sanitize CRLF sequences. Only create a custom blocklist when absolutely necessary. Always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.&#xd;&#xa;&#xd;&#xa;References&#x3a; &#xd;&#xa;CWE &#x28;https&#x3a;&#x2f;&#x2f;cwe.mitre.org&#x2f;data&#x2f;definitions&#x2f;117.html&#x29; &#xd;&#xa;OWASP &#x28;https&#x3a;&#x2f;&#x2f;owasp.org&#x2f;www-community&#x2f;attacks&#x2f;Log_Injection&#x29; &#xd;&#xa;Supported Cleansers &#x28;https&#x3a;&#x2f;&#x2f;docs.veracode.com&#x2f;r&#x2f;review_cleansers&#x3f;tocId&#x3d;nYnZqAenFFZmB75MQrZwuA&#x29;&#xd;&#xa;&#xd;&#xa;" note="" cweid="117" remediationeffort="2" exploitLevel="1" categoryid="21" pcirelated="true" date_first_occurrence="2022-12-12 07&#x3a;40&#x3a;07 UTC" remediation_status="New" cia_impact="npp" grace_period_expires="" affects_policy_compliance="false" mitigation_status="none" mitigation_status_desc="Not Mitigated" sourcefile="SecureLogger.java" line="129" sourcefilepath="com&#x2f;veracode&#x2f;security&#x2f;logging&#x2f;" scope="com.veracode.security.logging.SecureLogger" functionprototype="void debug&#x28;java.lang.String&#x29;" functionrelativelocation="62"/>
+               <flaw severity="3" categoryname="Improper Output Neutralization for Logs" count="1" issueid="7" module="pipeline-scan.jar" type="org.slf4j.Logger.error" description="This call to org.slf4j.Logger.error&#x28;&#x29; could result in a log forging attack. Writing untrusted data into a log file allows an attacker to forge log entries or inject malicious content into log files. Corrupted log files can be used to cover an attacker&#x27;s tracks or as a delivery mechanism for an attack on a log viewing or processing utility. For example, if a web administrator uses a browser-based utility to review logs, a cross-site scripting attack might be possible. The first argument to error&#x28;&#x29; contains tainted data from the variable escapedString. The tainted data originated from an earlier call to org.apache.http.impl.client.CloseableHttpClient.execute.&#xd;&#xa;&#xd;&#xa;Avoid directly embedding user input in log files when possible. Sanitize untrusted data used to construct log entries by using a safe logging mechanism such as the OWASP ESAPI Logger, which will automatically remove unexpected carriage returns and line feeds and can be configured to use HTML entity encoding for non-alphanumeric data. Alternatively, some of the XSS escaping functions from the OWASP Java Encoder project will also sanitize CRLF sequences. Only create a custom blocklist when absolutely necessary. Always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.&#xd;&#xa;&#xd;&#xa;References&#x3a; &#xd;&#xa;CWE &#x28;https&#x3a;&#x2f;&#x2f;cwe.mitre.org&#x2f;data&#x2f;definitions&#x2f;117.html&#x29; &#xd;&#xa;OWASP &#x28;https&#x3a;&#x2f;&#x2f;owasp.org&#x2f;www-community&#x2f;attacks&#x2f;Log_Injection&#x29; &#xd;&#xa;Supported Cleansers &#x28;https&#x3a;&#x2f;&#x2f;docs.veracode.com&#x2f;r&#x2f;review_cleansers&#x3f;tocId&#x3d;nYnZqAenFFZmB75MQrZwuA&#x29;&#xd;&#xa;&#xd;&#xa;" note="" cweid="117" remediationeffort="2" exploitLevel="1" categoryid="21" pcirelated="true" date_first_occurrence="2022-12-12 07&#x3a;40&#x3a;07 UTC" remediation_status="New" cia_impact="npp" grace_period_expires="" affects_policy_compliance="false" mitigation_status="none" mitigation_status_desc="Not Mitigated" sourcefile="SecureLogger.java" line="333" sourcefilepath="com&#x2f;veracode&#x2f;security&#x2f;logging&#x2f;" scope="com.veracode.security.logging.SecureLogger" functionprototype="void error&#x28;java.lang.String&#x29;" functionrelativelocation="62"/>
+            </staticflaws>
+         </cwe>
+      </category>
+   </severity>
+   <severity level="2">
+      <category categoryid="14" categoryname="Time and State" pcirelated="false">
+         <desc>
+            <para text="Time and State flaws are related to unexpected interactions between threads, processes, time, and information. These interactions happen through shared state&#x3a; semaphores, variables, the filesystem, and basically anything that can store information.  Vulnerabilities occur when there is a discrepancy between the programmer&#x27;s assumption of how a program executes and what happens in reality. "/>
+            <para text="State issues result from improper management or invalid assumptions about system state, such as assuming mutable objects are immutable.  Though these conditions are less commonly exploited by attackers, state issues can lead to unpredictable or undefined application behavior."/>
+         </desc>
+         <recommendations>
+            <para text="Limit the interleaving of operations on resources from multiple processes.  Use locking mechanisms to protect resources effectively.  Follow best practices with respect to mutable objects and internal references.  Pay close attention to asynchronous actions in processes and make copious use of sanity checks in systems that may be subject to synchronization errors."/>
+         </recommendations>
+         <cwe cweid="382" cwename="J2EE Bad Practices&#x3a; Use of System.exit&#x28;&#x29;" pcirelated="false" certjava="1141">
+            <description>
+               <text text="A web applications should not attempt to shut down its container.  A call to System.exit&#x28;&#x29; is probably part of leftover debug code or code imported from a non-J2EE application.  Non-web applications may contain a main&#x28;&#x29; method that calls System.exit&#x28;&#x29;, but generally should not call it from other locations in the code."/>
+            </description>
+            <staticflaws>
+               <flaw severity="2" categoryname="J2EE Bad Practices&#x3a; Use of System.exit&#x28;&#x29;" count="1" issueid="8" module="pipeline-scan.jar" type="exit" description="A J2EE application should not attempt to shut down its container. A call to System.exit&#x28;&#x29; is probably part of leftover debug code or code imported from a non-J2EE application. Non-web applications may contain a main&#x28;&#x29; method that calls System.exit&#x28;&#x29;, but generally should not call it from other locations in the code.&#xd;&#xa;&#xd;&#xa;Ensure that System.exit&#x28;&#x29; is never called by web applications.&#xd;&#xa;&#xd;&#xa;References&#x3a; &#xd;&#xa;CWE &#x28;https&#x3a;&#x2f;&#x2f;cwe.mitre.org&#x2f;data&#x2f;definitions&#x2f;382.html&#x29;&#xd;&#xa;&#xd;&#xa;" note="" cweid="382" remediationeffort="1" exploitLevel="-1" categoryid="14" pcirelated="false" date_first_occurrence="2022-12-12 07&#x3a;40&#x3a;07 UTC" remediation_status="New" cia_impact="nnp" grace_period_expires="" affects_policy_compliance="false" mitigation_status="none" mitigation_status_desc="Not Mitigated" sourcefile="Main.java" line="107" sourcefilepath="com&#x2f;veracode&#x2f;greenlight&#x2f;tools&#x2f;scanner&#x2f;" scope="com.veracode.greenlight.tools.scanner.Main&#x24;1" functionprototype="void run&#x28;&#x29;" functionrelativelocation="89"/>
+            </staticflaws>
+         </cwe>
+      </category>
+   </severity>
+   <severity level="1"/>
+   <severity level="0"/>
+   <flaw-status new="3" reopen="0" open="0" fixed="0" total="3" not_mitigated="3" sev-1-change="0" sev-2-change="1" sev-3-change="2" sev-4-change="0" sev-5-change="0"/>
+   <customfields>
+      <customfield name="AppOwner" value=""/>
+      <customfield name="SRSID" value=""/>
+      <customfield name="Custom 3" value=""/>
+      <customfield name="Custom 4" value=""/>
+      <customfield name="Custom 5" value=""/>
+      <customfield name="Custom 6" value=""/>
+      <customfield name="Custom 7" value=""/>
+      <customfield name="Custom 8" value=""/>
+      <customfield name="Custom 9" value=""/>
+      <customfield name="Custom 10" value=""/>
+   </customfields>
+   <software_composition_analysis third_party_components="9" violate_policy="false" components_violated_policy="0">
+      <vulnerable_components>
+         <component component_id="06d4eae9-a85b-4990-80c2-2eba0d755ca4" file_name="jakarta.activation-api-1.2.1.jar" sha1="" vulnerabilities="0" max_cvss_score="" version="1.2.1" library="Jakarta Activation API" library_id="maven&#x3a;jakarta.activation&#x3a;jakarta.activation-api&#x3a;1.2.1&#x3a;" vendor="jakarta.activation" description="" added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;jakarta.activation-api-1.2.1.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Eclipse Distribution License &#x28;EDL&#x29;" spdx_id="EDL" license_url="https&#x3a;&#x2f;&#x2f;www.eclipse.org&#x2f;org&#x2f;documents&#x2f;edl-v10.php" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities/>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="08a62a28-97a7-4d63-ab8a-ec54de0271a3" file_name="jaxb-impl-2.3.2.jar" sha1="" vulnerabilities="0" max_cvss_score="" version="2.3.2" library="Old JAXB Runtime" library_id="maven&#x3a;com.sun.xml.bind&#x3a;jaxb-impl&#x3a;2.3.2&#x3a;" vendor="com.sun.xml.bind" description="Old JAXB Runtime module. Contains sources required for runtime processing." added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;jaxb-impl-2.3.2.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Eclipse Distribution License &#x28;EDL&#x29;" spdx_id="EDL" license_url="https&#x3a;&#x2f;&#x2f;www.eclipse.org&#x2f;org&#x2f;documents&#x2f;edl-v10.php" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities/>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="0ebf669d-3c5b-4031-8488-8c1519f2ceb8" file_name="commons-logging-1.2.jar" sha1="" vulnerabilities="0" max_cvss_score="" version="1.2" library="Apache Commons Logging" library_id="maven&#x3a;commons-logging&#x3a;commons-logging&#x3a;1.2&#x3a;" vendor="commons-logging" description="Apache Commons Logging is a thin adapter allowing configurable bridging to other,&#xa;    well known logging systems." added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;commons-logging-1.2.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities/>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="3df5187f-1b71-481e-a108-6e1bd3db2729" file_name="ini4j-0.5.4.jar" sha1="" vulnerabilities="1" max_cvss_score="5.0" version="0.5.4" library="ini4j" library_id="maven&#x3a;org.ini4j&#x3a;ini4j&#x3a;0.5.4&#x3a;" vendor="org.ini4j" description="Java API for handling configuration files in Windows .ini format. The library includes its own Map based API, Java Preferences API and Java Beans API for handling .ini files. Additionally, the library includes a feature rich &#x28;variable&#x2f;macro substitution, multiply property values, etc&#x29; java.util.Properties replacement." added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;ini4j-0.5.4.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities>
+               <vulnerability cve_id="CVE-2022-41404" cvss_score="5.0" severity="3" cwe_id="" first_found_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" cve_summary="org.ini4j&#x3a;ini4j is vulnerable to denial of service &#x28;DoS&#x29; attacks. The vulnerable &#x60;fetch&#x60; method in the &#x60;BasicProfile.java&#x60; allows remote attackers to cause denial of service conditions in the target system." severity_desc="Medium" mitigation="true" mitigation_type="Potential False Positive" mitigated_date="2023-01-05 16&#x3a;15&#x3a;07 UTC" vulnerability_affects_policy_compliance="false">
+                  <mitigations>
+                     <mitigation action="Potential False Positive" description="testing" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2023-01-05 16&#x3a;15&#x3a;07 UTC"/>
+                     <mitigation action="Approve Mitigation" description="asda" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 16&#x3a;00&#x3a;29 UTC"/>
+                     <mitigation action="Mitigate by Design" description="&#xd;Technique&#x3a; M1 &#x3a;  Establish and maintain control over all of your inputs&#xd;&#xa;Specifics&#x3a; sds&#xd;&#xa;Remaining Risk&#x3a; sd&#xd;&#xa;Verification&#x3a; asd" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 15&#x3a;59&#x3a;53 UTC"/>
+                  </mitigations>
+               </vulnerability>
+            </vulnerabilities>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="5a8617f6-6158-4b69-bbf3-fd8aba83235f" file_name="jsoup-1.14.3.jar" sha1="" vulnerabilities="1" max_cvss_score="6.4" version="1.14.3" library="jsoup Java HTML Parser" library_id="maven&#x3a;org.jsoup&#x3a;jsoup&#x3a;1.14.3&#x3a;" vendor="org.jsoup" description="" added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;jsoup-1.14.3.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="MIT License" spdx_id="MIT" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;MIT.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities>
+               <vulnerability cve_id="CVE-2022-36033" cvss_score="6.4" severity="4" cwe_id="CWE-79" first_found_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" cve_summary="jsoup is vulnerable to cross-site scripting. The vulnerability exists in &#x60;resolve&#x60; function in &#x60;StringUtil.java&#x60; because the jsoup cleaner is not properly sanitized when SafeList.preserveRelativeLinks is enabled which allows an attacker to inject and execute arbitrary javascript." severity_desc="High" mitigation="true" mitigation_type="Potential False Positive" mitigated_date="2022-12-12 08&#x3a;57&#x3a;30 UTC" vulnerability_affects_policy_compliance="false">
+                  <mitigations>
+                     <mitigation action="Approve Mitigation" description="testg" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 08&#x3a;57&#x3a;30 UTC"/>
+                     <mitigation action="Potential False Positive" description="testr" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 08&#x3a;57&#x3a;21 UTC"/>
+                  </mitigations>
+               </vulnerability>
+            </vulnerabilities>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="bd3b71c3-7d16-45d7-b0fd-50db30003713" file_name="httpcomponents-httpmime-4.5.10.jar" sha1="" vulnerabilities="0" max_cvss_score="" version="4.5.10" library="Apache HttpMime" library_id="maven&#x3a;org.lucee&#x3a;httpcomponents-httpmime&#x3a;4.5.10&#x3a;" vendor="org.lucee" description="" added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;httpcomponents-httpmime-4.5.10.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities/>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="c030254f-1578-4795-98c2-092fa603c97d" file_name="commons-lang3-3.11.jar" sha1="" vulnerabilities="0" max_cvss_score="" version="3.11" library="Apache Commons Lang" library_id="maven&#x3a;org.apache.commons&#x3a;commons-lang3&#x3a;3.11&#x3a;" vendor="org.apache.commons" description="" added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;commons-lang3-3.11.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities/>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="c51a9485-8565-436f-a414-34cab4215f4a" file_name="commons-codec-1.11.jar" sha1="" vulnerabilities="1" max_cvss_score="5.0" version="1.11" library="Apache Commons Codec" library_id="maven&#x3a;commons-codec&#x3a;commons-codec&#x3a;1.11&#x3a;" vendor="commons-codec" description="The Apache Commons Codec package contains simple encoder and decoders for&#xa;     various formats such as Base64 and Hexadecimal.  In addition to these&#xa;     widely used encoders and decoders, the codec package also maintains a&#xa;     collection of phonetic encoding utilities." added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;commons-codec-1.11.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities>
+               <vulnerability cve_id="SRCCLR-SID-22742" cvss_score="5.0" severity="3" cwe_id="" first_found_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" cve_summary="commons-codec does not properly perform input validation on encoded values. The &#x60;decode&#x28;&#x29;&#x60; function in the Base32, Base64 and BCodec classes fails to reject malformed Base32 and Base64 encoded strings and decodes into arbitrary values. A remote attacker can leverage this vulnerability to tunnel additional information via Base32 or Base64 encoded strings that appears to be legitimate." severity_desc="Medium" mitigation="true" mitigation_type="Potential False Positive" mitigated_date="2023-01-04 17&#x3a;38&#x3a;44 UTC" vulnerability_affects_policy_compliance="false">
+                  <mitigations>
+                     <mitigation action="Comment" description="testing" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2023-01-04 17&#x3a;38&#x3a;44 UTC"/>
+                     <mitigation action="Approve Mitigation" description="testing" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 08&#x3a;22&#x3a;48 UTC"/>
+                     <mitigation action="Potential False Positive" description="testing" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 08&#x3a;22&#x3a;36 UTC"/>
+                  </mitigations>
+               </vulnerability>
+            </vulnerabilities>
+            <violated_policy_rules/>
+         </component>
+         <component component_id="eb34211e-6076-44cf-9edf-b2cf2e000688" file_name="commons-text-1.9.jar" sha1="" vulnerabilities="1" max_cvss_score="7.5" version="1.9" library="Apache Commons Text" library_id="maven&#x3a;org.apache.commons&#x3a;commons-text&#x3a;1.9&#x3a;" vendor="org.apache.commons" description="" added_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" component_affects_policy_compliance="false">
+            <file_paths>
+               <file_path value="pipeline-scan.jar&#x3a;commons-text-1.9.jar"/>
+            </file_paths>
+            <licenses>
+               <license name="Apache License 2.0" spdx_id="Apache-2.0" license_url="https&#x3a;&#x2f;&#x2f;spdx.org&#x2f;licenses&#x2f;Apache-2.0.html" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+                  <mitigations/>
+               </license>
+            </licenses>
+            <vulnerabilities>
+               <vulnerability cve_id="CVE-2022-42889" cvss_score="7.5" severity="4" cwe_id="CWE-94" first_found_date="2022-12-12 08&#x3a;19&#x3a;48 UTC" cve_summary="Apache Commons Text is vulnerable to arbitrary code execution. The vulnerability exists in the &#x60;lookup&#x60; module due to insecure interpolation defaults when untrusted configuration values are used which allows an attacker to inject arbitrary code into the system." severity_desc="High" mitigation="true" mitigation_type="Potential False Positive" mitigated_date="2022-12-12 15&#x3a;58&#x3a;13 UTC" vulnerability_affects_policy_compliance="false">
+                  <mitigations>
+                     <mitigation action="Approve Mitigation" description="tets" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 15&#x3a;58&#x3a;13 UTC"/>
+                     <mitigation action="Potential False Positive" description="test" user="login.external.hp.comkatha.sai.manjunath.reddy&#x40;hp.com" date="2022-12-12 15&#x3a;58&#x3a;06 UTC"/>
+                  </mitigations>
+               </vulnerability>
+            </vulnerabilities>
+            <violated_policy_rules/>
+         </component>
+      </vulnerable_components>
+   </software_composition_analysis>
+</detailedreport>
