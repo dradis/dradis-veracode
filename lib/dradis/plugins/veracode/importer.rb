@@ -57,19 +57,16 @@ module Dradis::Plugins::Veracode
 
     def parse_flaw(xml_flaw)
       cwe_id = xml_flaw[:cweid]
-      logger.info { "\t\t => Creating new issue (flaw issueid: #{ cwe_id })" }
+      logger.info { "\t\t => Creating issue and evidence (flaw cweid: #{ cwe_id })" }
 
-      issue_text = template_service.process_template(template: 'issue', data: xml_flaw)
+      logger.info { "Adding report details (app_name: #{ app_name })" }
+      flaw = ::Veracode::Flaw.new(xml_flaw)
+      issue_text = template_service.process_template(template: 'issue', data: flaw)
       issue = content_service.create_issue(text: issue_text, id: cwe_id)
 
-      # Flag the XML by adding an attribute so the FieldProcessor can differentiate
-      # which method to use: Flaw vs Evidence
-      xml_flaw[:dradis_type] = :evidence
-
-      evidence_text = template_service.process_template(template: 'evidence', data: xml_flaw)
-      evidence = content_service.create_evidence(
-        content: evidence_text, issue: issue, node: @node
-      )
+      veracode_evidence = ::Veracode::Evidence.new(xml_flaw)
+      evidence_text = template_service.process_template(template: 'evidence', data: veracode_evidence)
+      evidence = content_service.create_evidence(content: evidence_text, issue: issue, node: @node)
     end
   end
 end
