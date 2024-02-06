@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<cwe cweid="259" cwename="Use of Hard-coded Password" pcirelated="true" owasp="1353" sans="798" certjava="1152">
+  <description>
+    <text text="A method uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack."/>
+  </description>
+  <staticflaws>
+    <flaw
+      severity="4"
+      categoryname="Use of Hard-coded Password"
+      count="1"
+      issueid="125"
+      module="JS files within myBank_SourceCode_1119224.zip"
+      type="set"
+      description="This variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied. The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised. Moreover, the password cannot be changed without patching the software. If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack. In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. set&#13;&#10;&#13;&#10;Store passwords out-of-band from the application code. Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.&#13;&#10;&#13;&#10;References: &#13;&#10;CWE (https://cwe.mitre.org/data/definitions/259.html)&#13;&#10;&#13;&#10;"
+      note=""
+      cweid="259"
+      remediationeffort="4"
+      exploitLevel="1"
+      categoryid="10"
+      pcirelated="true"
+      date_first_occurrence="2021-12-10 07:49:58 UTC"
+      remediation_status="Potential False Positive"
+      cia_impact="ppn"
+      grace_period_expires="2022-02-09 22:50:56 UTC"
+      affects_policy_compliance="true"
+      mitigation_status="accepted"
+      mitigation_status_desc="Mitigation Accepted"
+      sourcefile="constants.ts"
+      line="186"
+      sourcefilepath="/libraries/mybank/src/"
+      scope="UNKNOWN"
+      functionprototype="!main() : void"
+      functionrelativelocation="-1"
+      dradis_type="evidence">
+
+      <mitigations>
+        <mitigation action="Potential False Positive" description="As discussed last week, these are potential false positives. Need your review." user="Adama" date="2022-01-24 21:55:55 UTC"/>
+        <mitigation action="Potential False Positive" description="All six items are API keys used to authenticate with a service. None of the marked code lines are storing the password directly" user="Starbuck" date="2022-01-25 06:38:52 UTC"/>
+      </mitigations>
+      <annotations>
+        <annotation action="Potential False Positive" description="As discussed last week, these are potential false positives. Need your review." user="Adama" date="2022-01-24 21:55:55 UTC"/>
+        <annotation action="Potential False Positive" description="All six items are API keys used to authenticate with a service. None of the marked code lines are storing the password directly" user="Starbuck" date="2022-01-25 06:38:52 UTC"/>
+      </annotations>
+    </flaw>
+  </staticflaws>
+</cwe>

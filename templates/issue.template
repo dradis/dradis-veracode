@@ -19,9 +19,6 @@ Internal
 #[References]#
 https://cwe.mitre.org/data/definitions/%issue.cweid%.html
 
-#[VeracodeID]#
-%issue.issueid%
-
 #[Severity]#
 %issue.severity%
 
@@ -30,15 +27,6 @@ https://cwe.mitre.org/data/definitions/%issue.cweid%.html
 
 #[CWE]#
 %issue.cweid%
-
-#[File]#
-%issue.sourcefilepath%%issue.sourcefile%
-
-#[Module]#
-%issue.module%
-
-#[Line]#
-%issue.line%
 
 #[RemediationStatus]#
 %issue.remediation_status%
