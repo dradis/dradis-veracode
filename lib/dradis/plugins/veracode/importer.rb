@@ -59,7 +59,6 @@ module Dradis::Plugins::Veracode
       cwe_id = xml_flaw[:cweid]
       logger.info { "\t\t => Creating issue and evidence (flaw cweid: #{ cwe_id })" }
 
-      logger.info { "Adding report details (app_name: #{ app_name })" }
       flaw = ::Veracode::Flaw.new(xml_flaw)
       issue_text = template_service.process_template(template: 'issue', data: flaw)
       issue = content_service.create_issue(text: issue_text, id: cwe_id)
