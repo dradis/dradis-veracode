@@ -25,13 +25,13 @@ module Dradis::Plugins::Veracode
       end
 
       # create app_name, and parse attributes
-      @node = parse_report_details(xml.root)
+      node = parse_report_details(xml.root)
 
       # parse each severity > category > cwe > flaws
       xml.root.xpath('./xmlns:severity').each do |xml_severity|
         logger.info { "\t => Severity (level: #{ xml_severity[:level] })" }
         xml_severity.xpath('.//xmlns:flaw').each do |xml_flaw|
-          parse_flaw(xml_flaw)
+          parse_flaw(xml_flaw, node)
         end
       end
     end
@@ -55,7 +55,7 @@ module Dradis::Plugins::Veracode
       app_node
     end
 
-    def parse_flaw(xml_flaw)
+    def parse_flaw(xml_flaw, node)
       cwe_id = xml_flaw[:cweid]
       logger.info { "\t\t => Creating issue and evidence (flaw cweid: #{ cwe_id })" }
 
@@ -65,7 +65,7 @@ module Dradis::Plugins::Veracode
 
       veracode_evidence = ::Veracode::Evidence.new(xml_flaw)
       evidence_text = template_service.process_template(template: 'evidence', data: veracode_evidence)
-      evidence = content_service.create_evidence(content: evidence_text, issue: issue, node: @node)
+      evidence = content_service.create_evidence(content: evidence_text, issue: issue, node: node)
     end
   end
 end
