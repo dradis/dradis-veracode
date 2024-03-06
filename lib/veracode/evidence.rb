@@ -1,14 +1,5 @@
 module Veracode
-  # This class represents each of the
-  # detailedreport/severity/category/cwe/staticflaws/flaw elements in the
-  # Veracode XML document.
-  #
-  # It provides a convenient way to access the information scattered all over
-  # the XML in attributes and nested tags.
-  #
-  # Instead of providing separate methods for each supported property we rely
-  # on Ruby's #method_missing to do most of the work.
-  class Flaw
+  class Evidence
     # Accepts an XML node from Nokogiri::XML.
     def initialize(xml_flaw)
       @xml = xml_flaw
@@ -18,16 +9,15 @@ module Veracode
     # collections (e.g. <references/>, <tags/>)
     def supported_tags
       [
-        # attributes
-        :categoryid, :categoryname, :cweid, :cwename, :description, :exploitlevel,
-        :mitigation_status, :mitigation_status_desc, :note, :remediation_status,
-        :remediationeffort, :severity
+        :description, :exploitlevel, :issueid, :line, :mitigation_status,
+        :mitigation_status_desc, :module, :remediation_status,
+        :remediationeffort, :sourcefile, :sourcefilepath
       ]
     end
 
     # This allows external callers (and specs) to check for implemented
     # properties
-    def respond_to?(method, include_private=false)
+    def respond_to?(method, include_private = false)
       return true if supported_tags.include?(method.to_sym)
       super
     end
@@ -51,8 +41,6 @@ module Veracode
       # First we try the attributes
       method_name = method.to_s
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
-
-      return @xml.parent.parent[:cwename] if method == :cwename
     end
   end
 end
