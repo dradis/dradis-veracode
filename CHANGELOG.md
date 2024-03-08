@@ -1,7 +1,8 @@
 v4.12.0 (XXXX 2024)
   - Create evidence for every instance of <flaw>
-  - Use cweid as the issue identifier
+  - Migrate integration to use Mappings Manager
   - Update Dradis links in README
+  - Use cweid as the issue identifier
 
 v4.11.0 (January 2024)
   - No changes
