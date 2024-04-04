@@ -20,5 +20,35 @@ module Dradis::Plugins::Veracode
         'RemediationStatus' => '{{ veracode[issue.remediation_status] }}'
       }
     }.freeze
+
+    SOURCE_FIELDS = {
+      evidence: [
+        'evidence.description',
+        'evidence.exploitlevel',
+        'evidence.issueid',
+        'evidence.line',
+        'evidence.mitigation_status',
+        'evidence.mitigation_status_desc',
+        'evidence.module',
+        'evidence.remediation_status',
+        'evidence.remediationeffort',
+        'evidence.sourcefile',
+        'evidence.sourcefilepath'
+      ],
+      issue: [
+        'issue.categoryid',
+        'issue.categoryname',
+        'issue.cweid',
+        'issue.cwename',
+        'issue.description',
+        'issue.exploitlevel',
+        'issue.mitigation_status',
+        'issue.mitigation_status_desc',
+        'issue.note',
+        'issue.remediation_status',
+        'issue.remediationeffort',
+        'issue.severity'
+      ]
+    }.freeze
   end
 end
