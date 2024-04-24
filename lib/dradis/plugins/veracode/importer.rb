@@ -60,11 +60,11 @@ module Dradis::Plugins::Veracode
       logger.info { "\t\t => Creating issue and evidence (flaw cweid: #{ cwe_id })" }
 
       flaw = ::Veracode::Flaw.new(xml_flaw)
-      issue_text = template_service.process_template(template: 'issue', data: flaw)
+      issue_text = mapping_service.apply_mapping(source: 'issue', data: flaw)
       issue = content_service.create_issue(text: issue_text, id: cwe_id)
 
       veracode_evidence = ::Veracode::Evidence.new(xml_flaw)
-      evidence_text = template_service.process_template(template: 'evidence', data: veracode_evidence)
+      evidence_text = mapping_service.apply_mapping(source: 'evidence', data: veracode_evidence)
       evidence = content_service.create_evidence(content: evidence_text, issue: issue, node: node)
     end
   end
