@@ -1,8 +1,0 @@
-#[Description]#
-%evidence.description%
-
-#[LineNumber]#
-%evidence.line%
-
-#[SourceFile]#
-%evidence.sourcefile%
