@@ -1,9 +1,11 @@
-v4.12.0 (XXXX 2024)
+v4.13.0 (XXXX 2024)
+  - Add `issueid`, `line`, `module`, `sourcefile`, & `sourcefilepath` as available issue fields
+
+v4.12.0 (May 2024)
   - Create evidence for every instance of <flaw>
-  - Migrate integration to use Mappings Manager
   - Update Dradis links in README
   - Use cweid as the issue identifier
-  - Add `issueid`, `line`, `module`, `sourcefile`, & `sourcefilepath` as available issue fields
+  - Migrate integration to use Mappings Manager
 
 v4.11.0 (January 2024)
   - No changes
