@@ -20,8 +20,9 @@ module Veracode
       [
         # attributes
         :categoryid, :categoryname, :cweid, :cwename, :description, :exploitlevel,
-        :mitigation_status, :mitigation_status_desc, :note, :remediation_status,
-        :remediationeffort, :severity
+        :issueid, :line, :mitigation_status, :mitigation_status_desc, :module, 
+        :note, :remediation_status, :remediationeffort, :severity, :sourcefile, 
+        :sourcefilepath
       ]
     end
 

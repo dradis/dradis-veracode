@@ -1,3 +1,6 @@
+v4.13.0 (XXXX 2024)
+  - Add `issueid`, `line`, `module`, `sourcefile`, & `sourcefilepath` as available issue fields
+
 v4.12.0 (May 2024)
   - Create evidence for every instance of <flaw>
   - Update Dradis links in README
