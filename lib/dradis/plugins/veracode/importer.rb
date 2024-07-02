@@ -1,5 +1,10 @@
 module Dradis::Plugins::Veracode
   class Importer < Dradis::Plugins::Upload::Importer
+    attr_accessor :node
+
+    include Dradis::Plugins::Veracode::Formats::Flaw
+    include Dradis::Plugins::Veracode::Formats::Sca
+
     def self.templates
       { evidence: 'evidence', issue: 'issue' }
     end
@@ -25,14 +30,19 @@ module Dradis::Plugins::Veracode
       end
 
       # create app_name, and parse attributes
-      node = parse_report_details(xml.root)
+      @node = parse_report_details(xml.root)
 
       # parse each severity > category > cwe > flaws
       xml.root.xpath('./xmlns:severity').each do |xml_severity|
         logger.info { "\t => Severity (level: #{ xml_severity[:level] })" }
         xml_severity.xpath('.//xmlns:flaw').each do |xml_flaw|
-          parse_flaw(xml_flaw, node)
+          parse_flaw(xml_flaw)
         end
+      end
+
+      # parse each software_composition_analysis > vulnerabile_components -> component
+      xml.root.xpath('./xmlns:software_composition_analysis/xmlns:vulnerable_components/xmlns:component').each do |xml_component|
+        parse_component(xml_component)
       end
     end
 
@@ -53,19 +63,6 @@ module Dradis::Plugins::Veracode
 
       app_node.save
       app_node
-    end
-
-    def parse_flaw(xml_flaw, node)
-      cwe_id = xml_flaw[:cweid]
-      logger.info { "\t\t => Creating issue and evidence (flaw cweid: #{ cwe_id })" }
-
-      flaw = ::Veracode::Flaw.new(xml_flaw)
-      issue_text = mapping_service.apply_mapping(source: 'issue', data: flaw)
-      issue = content_service.create_issue(text: issue_text, id: cwe_id)
-
-      veracode_evidence = ::Veracode::Evidence.new(xml_flaw)
-      evidence_text = mapping_service.apply_mapping(source: 'evidence', data: veracode_evidence)
-      evidence = content_service.create_evidence(content: evidence_text, issue: issue, node: node)
     end
   end
 end
