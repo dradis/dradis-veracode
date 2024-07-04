@@ -4,7 +4,7 @@ module Dradis
       class FieldProcessor < Dradis::Plugins::Upload::FieldProcessor
         def post_initialize(args = {})
           @record =
-            if (data.is_a?(::Veracode::Flaw) || data.is_a?(::Veracode::Evidence))
+            if (data.is_a?(::Veracode::Flaw) || data.is_a?(::Veracode::Evidence) || data.is_a?(::Veracode::Vulnerability))
               data
 
             # Note: The evidence and flaw samples are the same but they need to
@@ -12,6 +12,8 @@ module Dradis
             # we're adding a "dradis_type" attribute in the evidence.sample file
             elsif (data['dradis_type'] == 'evidence')
               ::Veracode::Evidence.new(data.at_xpath('./staticflaws/flaw'))
+            elsif (data.name == 'component')
+              ::Veracode::Vulnerability.new(data.at_xpath('.//vulnerability'))
             else
               ::Veracode::Flaw.new(data.at_xpath('./staticflaws/flaw'))
             end
