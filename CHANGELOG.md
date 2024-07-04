@@ -1,3 +1,6 @@
+v4.13.0 (Month 2024)
+  - Import data from the software composition analysis section
+
 v4.12.0 (May 2024)
   - Create evidence for every instance of <flaw>
   - Update Dradis links in README
