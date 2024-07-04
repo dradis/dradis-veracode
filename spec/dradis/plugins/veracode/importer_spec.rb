@@ -6,8 +6,10 @@ describe Dradis::Plugins::Veracode::Importer do
   before(:each) do
     # Stub template service
     templates_dir = File.expand_path('../../../../../templates', __FILE__)
-    expect_any_instance_of(Dradis::Plugins::TemplateService)
-    .to receive(:default_templates_dir).and_return(templates_dir)
+
+    mapping_service = double('Dradis::Plugins::MappingService')
+    allow(mapping_service).to receive(:apply_mapping).and_return('')
+    allow(Dradis::Plugins::MappingService).to receive(:new).and_return(mapping_service)
 
     # Init services
     plugin = Dradis::Plugins::Veracode
@@ -36,13 +38,11 @@ describe Dradis::Plugins::Veracode::Importer do
   it 'creates nodes, issues, and, evidence' do
     expect(@content_service).to receive(:create_node).with(hash_including label: 'Cybersecurity-Pilot').once
 
-    %w{ 117 382 }.each do |cweid|
+    %w{ 117 382 CVE-2022-41404 CVE-2022-36033 SRCCLR-SID-22742 CVE-2022-42889 }.each do |cweid|
       expect(@content_service).to receive(:create_issue).with(hash_including id: cweid).at_least(:once)
     end
 
-    %w{ 107 129 333 }.each do |line|
-      expect(@content_service).to receive(:create_evidence).with(hash_including(content: a_string_matching(/#{line}/))).once
-    end
+    expect(@content_service).to receive(:create_evidence).with(hash_including(content: '')).at_least(7).times
 
     # Run the import
     @importer.import(file: 'spec/fixtures/files/veracode.xml')
