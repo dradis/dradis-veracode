@@ -22,14 +22,14 @@ module Dradis::Plugins::Veracode
       sca_evidence: {
         'File' => "{{ vercaode[sca_evidence.file_name] }}\n{{ vercaode[sca_evidence.file_path_value] }}",
         'Library' => "{{ vercaode[sca_evidence.library] }}\n{{ vercaode[sca_evidence.library_id] }}",
-        'Mitigation' => "{{ vercaode[sca_evidence.mitigation_action] }}\n{{ vercaode[sca_evidence.mitigation_description] }}\n{{ vercaode[sca_evidence.mitigation_date] }}"
+        'Mitigation' => "{{ vercaode[sca_evidence.mitigation] }}"
       },
       sca_issue: {
         'Title' => '{{ vercaode[sca_issue.cve_id] }}',
         'Description' => '{{ vercaode[sca_issue.cve_summary] }}',
         'Severity' => '{{ vercaode[sca_issue.severity_desc] }}',
         'Notes' => "CWE: {{ veracode[sca_issue.cwe_id] }}\nCVSS: {{ veracode[sca_issue.cvss_score] }}\nAffects policy compliance: {{ vercaode[sca_issue.vulnerability_affects_policy_compliance] }}",
-        'Mitigation' => "{{ vercaode[sca_issue.mitigation_action] }}\n{{ vercaode[sca_issue.mitigation_description] }}\n{{ vercaode[sca_issue.mitigation_date] }}"
+        'Mitigation' => "{{ vercaode[sca_issue.mitigation] }}"
       }
     }.freeze
 
@@ -66,19 +66,15 @@ module Dradis::Plugins::Veracode
         'sca_evidence.file_path_value',
         'sca_evidence.library',
         'sca_evidence.library_id',
-        'sca_evidence.mitigation_action',
-        'sca_evidence.mitigation_description',
-        'sca_evidence.mitigation_date'
+        'sca_evidence.mitigation',
       ],
-      sca_issues: [
+      sca_issue: [
         'sca_issue.cve_id',
         'sca_issue.severity_desc',
         'sca_issue.cwe_id',
         'sca_issue.cve_summary',
-        'sca_issue.mitigation_action',
-        'sca_issue.mitigation_description',
-        'sca_issue.mitigation_date',
         'sca_issue.cvss_score',
+        'sca_issue.mitigation',
         'sca_issue.severity',
         'sca_issue.vulnerability_affects_policy_compliance'
       ],

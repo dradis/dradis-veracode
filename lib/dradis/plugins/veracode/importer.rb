@@ -3,7 +3,7 @@ module Dradis::Plugins::Veracode
     attr_accessor :node
 
     include Dradis::Plugins::Veracode::Formats::Flaw
-    include Dradis::Plugins::Veracode::Formats::Sca
+    include Dradis::Plugins::Veracode::Formats::Vulnerability
 
     def self.templates
       { evidence: 'evidence', issue: 'issue' }
@@ -40,9 +40,9 @@ module Dradis::Plugins::Veracode
         end
       end
 
-      # parse each software_composition_analysis > vulnerabile_components -> component
-      xml.root.xpath('./xmlns:software_composition_analysis/xmlns:vulnerable_components/xmlns:component').each do |xml_component|
-        parse_component(xml_component)
+      # parse each software_composition_analysis > ... > vulnerability
+      xml.root.xpath('.//xmlns:vulnerability').each do |xml_vuln|
+        parse_vulnerability(xml_vuln)
       end
     end
 
