@@ -42,12 +42,17 @@ module Dradis::Plugins::Veracode
         'issue.cwename',
         'issue.description',
         'issue.exploitlevel',
+        'issue.issueid',
+        'issue.line',
         'issue.mitigation_status',
         'issue.mitigation_status_desc',
+        'issue.module',
         'issue.note',
         'issue.remediation_status',
         'issue.remediationeffort',
-        'issue.severity'
+        'issue.severity',
+        'issue.sourcefile',
+        'issue.sourcefilepath'
       ]
     }.freeze
   end
