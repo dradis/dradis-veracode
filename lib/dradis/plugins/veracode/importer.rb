@@ -6,7 +6,7 @@ module Dradis::Plugins::Veracode
     include Dradis::Plugins::Veracode::Formats::Vulnerability
 
     def self.templates
-      { evidence: 'evidence', issue: 'issue' }
+      { evidence: ['evidence', 'sca_evidence'], issue: ['issue', 'sca_issue'] }
     end
 
     # The framework will call this function if the user selects this plugin from

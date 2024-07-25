@@ -20,16 +20,16 @@ module Dradis::Plugins::Veracode
         'RemediationStatus' => '{{ veracode[issue.remediation_status] }}'
       },
       sca_evidence: {
-        'File' => "{{ vercaode[sca_evidence.file_name] }}\n{{ vercaode[sca_evidence.file_path_value] }}",
-        'Library' => "{{ vercaode[sca_evidence.library] }}\n{{ vercaode[sca_evidence.library_id] }}",
-        'Mitigation' => "{{ vercaode[sca_evidence.mitigation] }}"
+        'File' => "{{ veracode[sca_evidence.file_name] }}\n{{ veracode[sca_evidence.file_path_value] }}",
+        'Library' => "{{ veracode[sca_evidence.library] }}\n{{ veracode[sca_evidence.library_id] }}",
+        'Mitigation' => "{{ veracode[sca_evidence.mitigation] }}"
       },
       sca_issue: {
-        'Title' => '{{ vercaode[sca_issue.cve_id] }}',
-        'Description' => '{{ vercaode[sca_issue.cve_summary] }}',
-        'Severity' => '{{ vercaode[sca_issue.severity_desc] }}',
-        'Notes' => "CWE: {{ veracode[sca_issue.cwe_id] }}\nCVSS: {{ veracode[sca_issue.cvss_score] }}\nAffects policy compliance: {{ vercaode[sca_issue.vulnerability_affects_policy_compliance] }}",
-        'Mitigation' => "{{ vercaode[sca_issue.mitigation] }}"
+        'Title' => '{{ veracode[sca_issue.cve_id] }}',
+        'Description' => '{{ veracode[sca_issue.cve_summary] }}',
+        'Severity' => '{{ veracode[sca_issue.severity_desc] }}',
+        'Notes' => "CWE: {{ veracode[sca_issue.cwe_id] }}\nCVSS: {{ veracode[sca_issue.cvss_score] }}\nAffects policy compliance: {{ veracode[sca_issue.vulnerability_affects_policy_compliance] }}",
+        'Mitigation' => "{{ veracode[sca_issue.mitigation] }}"
       }
     }.freeze
 
@@ -70,12 +70,12 @@ module Dradis::Plugins::Veracode
       ],
       sca_issue: [
         'sca_issue.cve_id',
-        'sca_issue.severity_desc',
-        'sca_issue.cwe_id',
         'sca_issue.cve_summary',
         'sca_issue.cvss_score',
+        'sca_issue.cwe_id',
         'sca_issue.mitigation',
         'sca_issue.severity',
+        'sca_issue.severity_desc',
         'sca_issue.vulnerability_affects_policy_compliance'
       ],
     }.freeze
