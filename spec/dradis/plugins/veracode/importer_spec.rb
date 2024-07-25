@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'ostruct'
 
 describe Dradis::Plugins::Veracode::Importer do
-
   before(:each) do
     # Stub template service
     templates_dir = File.expand_path('../../../../../templates', __FILE__)
