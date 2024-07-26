@@ -11,8 +11,8 @@ module Dradis::Plugins::Veracode::Formats
       issue_text = mapping_service.apply_mapping(source: 'issue', data: flaw)
       issue = content_service.create_issue(text: issue_text, id: cwe_id)
 
-      veracode_evidence = ::Veracode::Evidence.new(xml_flaw)
-      evidence_text = mapping_service.apply_mapping(source: 'evidence', data: veracode_evidence)
+      evidence = ::Veracode::Evidence.new(xml_flaw)
+      evidence_text = mapping_service.apply_mapping(source: 'evidence', data: evidence)
       content_service.create_evidence(content: evidence_text, issue: issue, node: node)
     end
   end
