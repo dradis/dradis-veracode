@@ -1,4 +1,5 @@
 v4.13.0 (Month 2024)
+  - Add `issueid`, `line`, `module`, `sourcefile`, & `sourcefilepath` as available issue fields
   - Import data from the software composition analysis section
 
 v4.12.0 (May 2024)
