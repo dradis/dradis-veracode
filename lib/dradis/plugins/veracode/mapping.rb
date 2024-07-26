@@ -54,12 +54,17 @@ module Dradis::Plugins::Veracode
         'issue.cwename',
         'issue.description',
         'issue.exploitlevel',
+        'issue.issueid',
+        'issue.line',
         'issue.mitigation_status',
         'issue.mitigation_status_desc',
+        'issue.module',
         'issue.note',
         'issue.remediation_status',
         'issue.remediationeffort',
-        'issue.severity'
+        'issue.severity',
+        'issue.sourcefile',
+        'issue.sourcefilepath'
       ],
       sca_evidence: [
         'sca_evidence.file_name',
@@ -77,7 +82,7 @@ module Dradis::Plugins::Veracode
         'sca_issue.severity',
         'sca_issue.severity_desc',
         'sca_issue.vulnerability_affects_policy_compliance'
-      ],
+      ]
     }.freeze
   end
 end
