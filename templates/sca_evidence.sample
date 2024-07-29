@@ -1,0 +1,19 @@
+<component component_id="hash" file_name="filename.jar" sha1="" vulnerabilities="1" max_cvss_score="5.0" version="0.1.1" library="library" library_id="library_id" vendor="library.org" description="Sample description" added_date="2022-12-12 08&#x3a;19&#x3a;55 UTC" component_affects_policy_compliance="false">
+  <file_paths>
+     <file_path value="file_path"/>
+  </file_paths>
+  <licenses>
+     <license name="License" spdx_id="Apache-2.0" license_url="example.com" risk_rating="2" mitigation="false" license_affects_policy_compliance="false">
+        <mitigations/>
+     </license>
+  </licenses>
+  <vulnerabilities>
+     <vulnerability cve_id="CVE-2022-11111" cvss_score="5.0" severity="3" cwe_id="" first_found_date="2022-12-12 08&#x3a;19&#x3a;55 UTC" cve_summary="CVE Summary" severity_desc="Medium" mitigation="true" mitigation_type="Mitigate by Design" mitigated_date="2022-12-12 16&#x3a;00&#x3a;29 UTC" vulnerability_affects_policy_compliance="false">
+        <mitigations>
+           <mitigation action="Approve Mitigation" description="asda" user="sample_user" date="2022-12-12 16&#x3a;00&#x3a;55 UTC"/>
+           <mitigation action="Mitigate by Design" description="fdsa" user="sample_user" date="2022-12-12 15&#x3a;59&#x3a;55 UTC"/>
+        </mitigations>
+     </vulnerability>
+  </vulnerabilities>
+  <violated_policy_rules/>
+</component>

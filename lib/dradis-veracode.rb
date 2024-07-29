@@ -7,3 +7,4 @@ require 'dradis/plugins/veracode'
 # Load supporting Veracode classes
 require 'veracode/evidence'
 require 'veracode/flaw'
+require 'veracode/vulnerability'
