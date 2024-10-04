@@ -32,16 +32,18 @@ module Dradis::Plugins::Veracode
       # create app_name, and parse attributes
       @node = parse_report_details(xml.root)
 
-      # parse each severity > category > cwe > flaws
-      xml.root.xpath('./xmlns:severity').each do |xml_severity|
+      # parse each severity > category > cwe > staticflaws > flaw
+      xml.root.xpath('xmlns:severity').each do |xml_severity|
         logger.info { "\t => Severity (level: #{ xml_severity[:level] })" }
-        xml_severity.xpath('.//xmlns:flaw').each do |xml_flaw|
+        xml_severity.xpath('./xmlns:category/xmlns:cwe/xmlns:staticflaws/xmlns:flaw').each do |xml_flaw|
           parse_flaw(xml_flaw)
         end
       end
 
       # parse each software_composition_analysis > ... > vulnerability
-      xml.root.xpath('.//xmlns:vulnerability').each do |xml_vuln|
+      xml.root.xpath(
+        'xmlns:software_composition_analysis/xmlns:vulnerable_components//xmlns:vulnerability'
+      ).each do |xml_vuln|
         parse_vulnerability(xml_vuln)
       end
     end
