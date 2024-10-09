@@ -12,7 +12,7 @@ module Dradis
             elsif data['dradis_type'] == 'evidence'
               ::Veracode::Evidence.new(data.at_xpath('./staticflaws/flaw'))
             elsif data.name == 'component'
-              ::Veracode::Vulnerability.new(data.at_xpath('.//vulnerability'))
+              ::Veracode::Vulnerability.new(data.at_xpath('./vulnerabilities/vulnerability'))
             else
               ::Veracode::Flaw.new(data.at_xpath('./staticflaws/flaw'))
             end
