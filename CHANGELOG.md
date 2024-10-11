@@ -1,4 +1,4 @@
-v4.14.0(Month 2024)
+v4.14.0 (October 2024)
   - Import data from the software composition analysis section
 
 v4.13.0 (July 2024)
