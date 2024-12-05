@@ -35,7 +35,7 @@ describe Dradis::Plugins::Veracode::Importer do
   end
 
   it 'creates nodes, issues, and, evidence' do
-    expect(@content_service).to receive(:create_node).with(hash_including label: 'Cybersecurity-Pilot').once
+    expect(@content_service).to receive(:create_node).with(hash_including label: 'Example-App').once
 
     %w{ 117 382 CVE-2022-41404 CVE-2022-36033 SRCCLR-SID-22742 CVE-2022-42889 }.each do |cweid|
       expect(@content_service).to receive(:create_issue).with(hash_including id: cweid).at_least(:once)
@@ -44,6 +44,6 @@ describe Dradis::Plugins::Veracode::Importer do
     expect(@content_service).to receive(:create_evidence).with(hash_including(content: '')).at_least(7).times
 
     # Run the import
-    @importer.import(file: 'spec/fixtures/files/veracode.xml')
+    @importer.import(file: 'spec/fixtures/files/veracode-scrubbed.xml')
   end
 end
